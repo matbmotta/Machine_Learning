@@ -7,26 +7,72 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Machine Learning Web App</h1>
+    <h1>Machine Learning - Dados de Câncer de Mama</h1>
     <form action="/train" method="post">
-        <label for="classifier">Classifier:</label>
-        <select name="classifier" id="classifier">
+        <label for="classifier">Selecione um classificador:</label>
+        <select class="input_form" name="classifier" id="classifier">
             <option value="KNN">KNN</option>
-            <option value="SVM">SVM</option>
             <option value="MLP">MLP</option>
             <option value="DT">Decision Tree</option>
             <option value="RF">Random Forest</option>
         </select><br>
 
-        <label for="param1">Parameter 1:</label>
-        <input type="text" name="param1" required><br>
+        <div id="param1">
+            <label for="param1" id="labelParam1">Primeiro Parametro</label>
+            <input class="input_form" type="text" name="param1" id="txtParam1" required><br>
+        </div>
 
-        <label for="param2">Parameter 2:</label>
-        <input type="text" name="param2"><br>
+        <div id="param2">
+            <label for="param2" id="labelParam2">Segundo Parametro</label>
+            <input class="input_form"  type="text" name="param2" id="txtParam2"><br>
+        </div>
 
-        <!-- Adicione mais campos conforme necessário -->
+        <div id="param3">
+            <label for="param3" id="labelParam3">Terceiro Parametro</label>
+            <input class="input_form"  type="text" name="param3" id="txtParam3"><br>
+        </div>
 
-        <input type="submit" value="Train and Test">
+        <input class="btn-grad" type="submit" value="Treinar">
     </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function handleSelectedClassifier() {
+            $('#txtParam1').val('');
+            $('#txtParam2').val('');
+            $('#txtParam3').val('');
+
+            let fieldsCallback = {
+                'KNN': () => {
+                    $("#txtParam1").attr("placeholder", "n_neighbors");
+                    $("#txtParam2").attr("placeholder", "leaf_size");
+                    $("#txtParam3").attr("placeholder", "n_jobs");
+                },
+                'MLP': () => {
+                    $("#txtParam1").attr("placeholder", "max_iter");
+                    $("#txtParam2").attr("placeholder", "alpha");
+                    $("#txtParam3").attr("placeholder", "max_fun");
+                },
+                'DT': () => {
+                    $("#txtParam1").attr("placeholder", "max_depth");
+                    $("#txtParam2").attr("placeholder", "random_state");
+                    $("#txtParam3").attr("placeholder", "max_leaf_nodes");
+                },
+                'RF': () => {
+                    $("#txtParam1").attr("placeholder", "n_estimators");
+                    $("#txtParam2").attr("placeholder", "max_depth");
+                    $("#txtParam3").attr("placeholder", "random_state");
+                }
+            }
+
+            fieldsCallback[$('#classifier').val()]();
+        }
+
+        $(function() {
+            $('#classifier').change(handleSelectedClassifier);
+            handleSelectedClassifier();
+        });
+
+    </script>
 </body>
 </html>

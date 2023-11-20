@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Machine Learning Results</title>
+    <title>Apresentação de resultados</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,10 +26,10 @@
     </style>
 </head>
 <body>
-    <h1>Machine Learning Results</h1>
+    <h1>Resultados</h1>
 
     <div class="result-container">
-        <h2>Performance Metrics</h2>
+        <h2>Métricas</h2>
         <p>Accuracy: {{ accuracy }}</p>
         <p>Precision: {{ precision }}</p>
         <p>Recall: {{ recall }}</p>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="result-container">
-        <h2>Confusion Matrix</h2>
+        <h2>Matriz de confusão</h2>
         <img src="data:image/png;base64,{{ confusion_matrix }}" alt="Confusion Matrix">
     </div>
 </body>
